@@ -39,5 +39,15 @@ jobs:
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }} \
           --memory 512M \
-          --set-env-vars APP_NAME=${{ secrets.APP_NAME }} APP_ENV=${{ secrets.APP_ENV }} APP_KEY=${{ secrets.APP_KEY }} APP_DEBUG=${{ secrets.APP_DEBUG }} BROADCAST_DRIVER=${{ secrets.BROADCAST_DRIVER }} CACHE_DRIVER=${{ secrets.CACHE_DRIVER }} QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }} SESSION_DRIVER=${{ secrets.SESSION_DRIVER }} SESSION_LIFETIME=${{ secrets.SESSION_LIFETIME }} API_IMAGE_PROCESSING_SERVICE_URL=${{ secrets.API_IMAGE_PROCESSING_SERVICE_URL }} API_IMAGE_PROCESSING_SERVICE_API_KEY=${{ secrets.API_IMAGE_PROCESSING_SERVICE_API_KEY }}
+          --set-env-vars APP_NAME=${{ secrets.APP_NAME }} \
+          --set-env-vars APP_ENV=${{ secrets.APP_ENV }} \
+          --set-env-vars APP_KEY=${{ secrets.APP_KEY }} \
+          --set-env-vars APP_DEBUG=${{ secrets.APP_DEBUG }} \
+          --set-env-vars BROADCAST_DRIVER=${{ secrets.BROADCAST_DRIVER }} \
+          --set-env-vars CACHE_DRIVER=${{ secrets.CACHE_DRIVER }} \
+          --set-env-vars QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }} \
+          --set-env-vars SESSION_DRIVER=${{ secrets.SESSION_DRIVER }} \
+          --set-env-vars SESSION_LIFETIME=${{ secrets.SESSION_LIFETIME }} \
+          --set-env-vars API_IMAGE_PROCESSING_SERVICE_URL=${{ secrets.API_IMAGE_PROCESSING_SERVICE_URL }} \
+          --set-env-vars API_IMAGE_PROCESSING_SERVICE_API_KEY=${{ secrets.API_IMAGE_PROCESSING_SERVICE_API_KEY }}
 
