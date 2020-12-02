@@ -1,13 +1,13 @@
-name: Cloud Run Deployment
+name: Production Deployment
 
 on:
   push:
-    branches: [ main, staging ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, staging ]
+    branches: [ main ]
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -38,4 +38,15 @@ jobs:
           --platform managed \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }}
+          --set-env-vars APP_NAME=${{ secrets.APP_NAME }},\
+          APP_ENV=${{ secrets.APP_ENV }},\
+          APP_KEY=${{ secrets.APP_KEY }},\
+          APP_DEBUG=${{ secrets.APP_DEBUG }},\
+          BROADCAST_DRIVER=${{ secrets.BROADCAST_DRIVER }},\
+          CACHE_DRIVER=${{ secrets.CACHE_DRIVER }},\
+          QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }},\
+          SESSION_DRIVER=${{ secrets.SESSION_DRIVER }},\
+          SESSION_LIFETIME=${{ secrets.SESSION_LIFETIME }},\
+          API_IMAGE_PROCESSING_SERVICE_URL=${{ secrets.API_IMAGE_PROCESSING_SERVICE_URL }},\
+          API_IMAGE_PROCESSING_SERVICE_API_KEY=${{ secrets.API_IMAGE_PROCESSING_SERVICE_API_KEY }}
 
