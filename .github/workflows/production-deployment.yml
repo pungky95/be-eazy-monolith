@@ -39,14 +39,15 @@ jobs:
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }} \
           --memory 512M \
-          --set-env-vars APP_NAME=${{ secrets.APP_NAME }},\
-          APP_ENV=${{ secrets.APP_ENV }},\
-          APP_DEBUG=${{ secrets.APP_DEBUG }},\
-          BROADCAST_DRIVER=${{ secrets.BROADCAST_DRIVER }},\
-          CACHE_DRIVER=${{ secrets.CACHE_DRIVER }},\
-          QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }},\
-          SESSION_DRIVER=${{ secrets.SESSION_DRIVER }},\
-          SESSION_LIFETIME=${{ secrets.SESSION_LIFETIME }},\
-          API_IMAGE_PROCESSING_SERVICE_URL=${{ secrets.API_IMAGE_PROCESSING_SERVICE_URL }},\
+          --set-env-vars APP_NAME=${{ secrets.APP_NAME }}
+          APP_ENV=${{ secrets.APP_ENV }}
+          APP_KEY=${{ secrets.APP_KEY }}
+          APP_DEBUG=${{ secrets.APP_DEBUG }}
+          BROADCAST_DRIVER=${{ secrets.BROADCAST_DRIVER }}
+          CACHE_DRIVER=${{ secrets.CACHE_DRIVER }}
+          QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }}
+          SESSION_DRIVER=${{ secrets.SESSION_DRIVER }}
+          SESSION_LIFETIME=${{ secrets.SESSION_LIFETIME }}
+          API_IMAGE_PROCESSING_SERVICE_URL=${{ secrets.API_IMAGE_PROCESSING_SERVICE_URL }}
           API_IMAGE_PROCESSING_SERVICE_API_KEY=${{ secrets.API_IMAGE_PROCESSING_SERVICE_API_KEY }}
 
