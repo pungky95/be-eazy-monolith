@@ -1,27 +1,20 @@
-name: Be-Eazy-Monolith
+name: Test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, staging ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, staging ]
 
 jobs:
-  test:
+  laravel-tests:
+
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - env:
-          APP_NAME: ${{ secrets.APP_NAME }}  
-          APP_ENV: ${{ secrets.APP_ENV }}
-          APP_DEBUG: ${{ secrets.APP_DEBUG }}
-          LOG_CHANNEL: ${{ secrets.APP_CHANNEL }}
-          BROADCAST_DRIVER: ${{ secrets.BROADCAST_DRIVER }}
-          CACHE_DRIVER: ${{ secrets.CACHE_DRIVER }}
-          QUEUE_CONNECTION: ${{ secrets.QUEUE_CONNECTION }}
-          SESSION_DRIVER: ${{ secrets.SESSION_DRIVER }}
-          SESSION_LIFETIME: ${{ secrets.SESSION_LIFETIME }}
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Generate key
