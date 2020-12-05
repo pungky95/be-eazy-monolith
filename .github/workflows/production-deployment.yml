@@ -50,24 +50,24 @@ jobs:
         run: |
           docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME}}-production:latest
       - name: Deploy
-          run: |
-            gcloud run deploy ${{ secrets.REPOSITORY_NAME}}-production \
-            --region asia-southeast1 \
-            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME}}-production \
-            --platform managed \
-            --allow-unauthenticated \
-            --project ${{ secrets.GCP_PROJECT_ID }} \
-            --memory 512M \
-            --set-env-vars APP_NAME=${{ secrets.APP_NAME }} \
-            --set-env-vars APP_ENV=${{ secrets.APP_ENV }} \
-            --set-env-vars APP_KEY=${{ secrets.APP_KEY }} \
-            --set-env-vars APP_DEBUG=${{ secrets.APP_DEBUG }} \
-            --set-env-vars BROADCAST_DRIVER=${{ secrets.BROADCAST_DRIVER }} \
-            --set-env-vars CACHE_DRIVER=${{ secrets.CACHE_DRIVER }} \
-            --set-env-vars QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }} \
-            --set-env-vars SESSION_DRIVER=${{ secrets.SESSION_DRIVER }} \
-            --set-env-vars SESSION_LIFETIME=${{ secrets.SESSION_LIFETIME }} \
-            --set-env-vars API_IMAGE_PROCESSING_SERVICE_URL=${{ secrets.API_IMAGE_PROCESSING_SERVICE_URL }} \
-            --set-env-vars API_IMAGE_PROCESSING_SERVICE_API_KEY=${{ secrets.API_IMAGE_PROCESSING_SERVICE_API_KEY }}
+        run: |
+          gcloud run deploy ${{ secrets.REPOSITORY_NAME}}-production \
+          --region asia-southeast1 \
+          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME}}-production \
+          --platform managed \
+          --allow-unauthenticated \
+          --project ${{ secrets.GCP_PROJECT_ID }} \
+          --memory 512M \
+          --set-env-vars APP_NAME=${{ secrets.APP_NAME }} \
+          --set-env-vars APP_ENV=${{ secrets.APP_ENV }} \
+          --set-env-vars APP_KEY=${{ secrets.APP_KEY }} \
+          --set-env-vars APP_DEBUG=${{ secrets.APP_DEBUG }} \
+          --set-env-vars BROADCAST_DRIVER=${{ secrets.BROADCAST_DRIVER }} \
+          --set-env-vars CACHE_DRIVER=${{ secrets.CACHE_DRIVER }} \
+          --set-env-vars QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }} \
+          --set-env-vars SESSION_DRIVER=${{ secrets.SESSION_DRIVER }} \
+          --set-env-vars SESSION_LIFETIME=${{ secrets.SESSION_LIFETIME }} \
+          --set-env-vars API_IMAGE_PROCESSING_SERVICE_URL=${{ secrets.API_IMAGE_PROCESSING_SERVICE_URL }} \
+          --set-env-vars API_IMAGE_PROCESSING_SERVICE_API_KEY=${{ secrets.API_IMAGE_PROCESSING_SERVICE_API_KEY }}
 
 
