@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Copy .env
@@ -28,9 +28,9 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
         run: vendor/bin/phpunit
-  build_and_deploy:
+  build-deploy:
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Setup GCP Service Account
@@ -45,15 +45,16 @@ jobs:
           gcloud auth configure-docker
       - name: Build
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME}}-production:latest .
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME}}-${{ secrets.ENV_PRODUCTION }}:latest .
       - name: Push
         run: |
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME}}-production:latest
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME}}-${{ secrets.ENV_PRODUCTION }}:latest
       - name: Deploy
         run: |
-          gcloud run deploy ${{ secrets.REPOSITORY_NAME}}-production \
+          gcloud run deploy ${{ secrets.REPOSITORY_NAME}}-${{ secrets.ENV_PRODUCTION }} \
           --region asia-southeast1 \
-          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME}}-production \
+          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.REPOSITORY_NAME}}-${{ secrets.ENV_PRODUCTION }} \
+          --vpc-connector ${{ secrets.VPC_CONNECTOR_NAME_PREFIX }}-${{ secrets.ENV_PRODUCTION }} \
           --platform managed \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }} \
