@@ -58,7 +58,7 @@ jobs:
           --platform managed \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }} \
-          --memory 1GB \
+          --memory 1G \
           --set-env-vars APP_NAME=${{ secrets.APP_NAME }} \
           --set-env-vars APP_ENV=${{ secrets.APP_ENV }} \
           --set-env-vars APP_KEY=${{ secrets.APP_KEY }} \
